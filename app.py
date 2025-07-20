@@ -22,8 +22,10 @@ audio_data = st.audio_input("🎙️ Record your answer")
 audio_data = st.audio(audio_data, format='audio/wav')
 
 if audio_data and gemini_key:
-    with st.spinner("Transcribing..."):
-        result = transcribe_audio_with_gemini(audio_data, gemini_key)
+    if st.button("Transcribe Audio"):
+        with st.spinner("Transcribing..."):
+            result = transcribe_audio_with_gemini(audio_data, gemini_key)
+        
         st.success("Transcription complete!")
         st.markdown("### 📝 Transcribed Text")
         st.text_area("Output", value=result, height=200)
