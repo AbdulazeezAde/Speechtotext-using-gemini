@@ -1,3 +1,11 @@
+import streamlit as st
+import librosa
+import soundfile as sf
+import tempfile
+import os
+from io import BytesIO
+from google.generativeai import configure, GenerativeModel
+
 # -------------------------------
 # Audio Conversion Function
 # -------------------------------
