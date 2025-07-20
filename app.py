@@ -6,6 +6,13 @@ import os
 from io import BytesIO
 from google.generativeai import configure, GenerativeModel
 from utils import convert_to_supported_format, transcribe_audio_with_gemini
+from dotenv import load_dotenv
+
+# Load from .env file into environment
+load_dotenv()
+
+# Fetch the key
+gemini_key = os.getenv("GEMINI_API_KEY")
 
 # -------------------------------
 # Streamlit UI
@@ -14,8 +21,6 @@ st.set_page_config(page_title="🎙️ Gemini Audio Transcriber", layout="center
 
 st.title("🎙️ Gemini Audio Transcriber")
 st.markdown("Record or upload audio to transcribe using **Gemini API**.")
-
-gemini_key = st.text_input("🔑 Enter your Gemini API Key:", type="password")
 
 #audio_data = st.audio(label="🎤 Record or Upload Your Audio", format="audio/wav")
 
