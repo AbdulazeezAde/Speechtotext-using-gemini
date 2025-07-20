@@ -5,8 +5,9 @@ import tempfile
 import os
 from io import BytesIO
 from google.generativeai import configure, GenerativeModel
-from utils import convert_to_supported_format, transcribe_audio_with_gemini
+from utils import convert_to_supported_format, transcribe_audio_with_gemini, transcribe_in_background
 from dotenv import load_dotenv
+import concurrent.futures
 
 # Load from .env file into environment
 load_dotenv()
@@ -34,7 +35,7 @@ if audio_data:
 if audio_data and gemini_key:
     if st.button("Transcribe Audio"):
         with st.spinner("Transcribing..."):
-            result = transcribe_audio_with_gemini(audio_data, gemini_key)
+            result = transcribe_in_background(audio_data, gemini_key)
 
         st.success("Transcription complete!")
         st.markdown("### 📝 Transcribed Text")
