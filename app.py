@@ -18,17 +18,22 @@ st.markdown("Record or upload audio to transcribe using **Gemini API**.")
 gemini_key = st.text_input("🔑 Enter your Gemini API Key:", type="password")
 
 #audio_data = st.audio(label="🎤 Record or Upload Your Audio", format="audio/wav")
+
+# 🎙️ Record from microphone or upload
 audio_data = st.audio_input("🎙️ Record your answer")
-audio_data = st.audio(audio_data, format='audio/wav')
+
+# Optional playback
+if audio_data:
+    st.audio(audio_data, format='audio/wav')
 
 if audio_data and gemini_key:
     if st.button("Transcribe Audio"):
         with st.spinner("Transcribing..."):
             result = transcribe_audio_with_gemini(audio_data, gemini_key)
-        
+
         st.success("Transcription complete!")
         st.markdown("### 📝 Transcribed Text")
         st.text_area("Output", value=result, height=200)
 
 elif not audio_data:
-    st.info("Please upload or record an audio file.")
+    st.info("Please record or upload an audio file.")
