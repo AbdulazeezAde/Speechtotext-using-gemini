@@ -40,7 +40,7 @@ def transcribe_audio_with_gemini(audio_data, gemini_key):
         if "gemini_client" not in st.session_state:
             try:
                 configure(api_key=gemini_key)
-                st.session_state.gemini_client = GenerativeModel("models/gemini-1.5-pro-latest")
+                st.session_state.gemini_client = GenerativeModel("models/gemini-1.5-flash")
             except Exception as init_error:
                 return f"Failed to initialize Gemini client: {str(init_error)}"
 
