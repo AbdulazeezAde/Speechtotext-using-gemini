@@ -5,7 +5,7 @@ import tempfile
 import os
 from io import BytesIO
 from google.generativeai import configure, GenerativeModel
-
+import concurrent.futures
 # -------------------------------
 # Audio Conversion Function
 # -------------------------------
@@ -78,3 +78,8 @@ def transcribe_audio_with_gemini(audio_data, gemini_key):
 
     except Exception as e:
         return f"Transcription error: {str(e)}"
+
+def transcribe_in_background(audio_data, gemini_key):
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future = executor.submit(transcribe_audio_with_gemini, audio_data, gemini_key)
+        return future.result()
